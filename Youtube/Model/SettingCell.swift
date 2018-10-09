@@ -44,6 +44,13 @@ class SettingCell: UICollectionViewCell {
         return image
     }()
     
+    let spacingLine: UIView = {
+        let line = UIView()
+        line.backgroundColor = .lightGray
+        line.translatesAutoresizingMaskIntoConstraints = false
+        return line
+    }()
+    
     func setupView() {
         addSubview(nameLabel)
         addSubview(iconImage)
@@ -51,7 +58,7 @@ class SettingCell: UICollectionViewCell {
         addConstraintsWithForMat(format: "H:|-8-[v0(30)]-8-[v1]|", views: iconImage, nameLabel)
         addConstraintsWithForMat(format: "V:|[v0]|", views: nameLabel)
         addConstraintsWithForMat(format: "V:[v0(30)]", views: iconImage)
-    
+        
         addConstraint(NSLayoutConstraint(item: iconImage, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
     }
     

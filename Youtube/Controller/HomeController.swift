@@ -49,6 +49,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }.resume()
     }
     
+    lazy var settingsLauncher: SettingsLauncher = {
+        let launcher = SettingsLauncher()
+        launcher.homeController = self
+        return launcher
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,8 +87,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let settingsController = UIViewController()
         settingsController.view.backgroundColor = .white
         settingsController.navigationItem.title = setting.name.rawValue
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         navigationController?.pushViewController(settingsController, animated: true)
     }
     
@@ -96,7 +102,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationItem.rightBarButtonItems = [moreButton, searchButton]
     }
     
-    let settingsLauncher = SettingsLauncher()
     
     @objc func handleMore() {
         settingsLauncher.showSettings()

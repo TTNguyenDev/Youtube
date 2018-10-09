@@ -80,12 +80,14 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
             }
         }, completion: nil)
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let setting = self.settings[indexPath.item]
         handleDismiss(setting: setting)
+        if setting.name != .Cancel {
+            self.homeController?.showControllerForSetting(setting: setting)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
