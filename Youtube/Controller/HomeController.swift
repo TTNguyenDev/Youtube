@@ -1,17 +1,45 @@
-//
-//  ViewController.swift
-//  Youtube
-//
-//  Created by TT Nguyen on 10/2/18.
-//  Copyright © 2018 TT Nguyen. All rights reserved.
-//
-
 import UIKit
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout  {
-    
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     let cellId = "celId"
     var videos: [Video]?
+    lazy var settingsLauncher: SettingsLauncher = {
+        let launcher = SettingsLauncher()
+        launcher.homeController = self
+        return launcher
+    }()
+    
+    @objc func handleMore() {
+        settingsLauncher.showSettings()
+    }
+    
+    @objc func handleSearch() {
+        print("searchButton")
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fetchVideo()
+        
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
+        titleLabel.text = "  YouTube"
+        titleLabel.textColor = .black
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        navigationItem.titleView = titleLabel
+        
+        self.navigationController?.navigationBar.layer.masksToBounds = false
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.lightGray.cgColor
+        self.navigationController?.navigationBar.layer.shadowOpacity = 10
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 5.0)
+        self.navigationController?.navigationBar.layer.shadowRadius = 10
+        
+        collectionView.backgroundColor = .white
+        collectionView.register(VideoCell.self, forCellWithReuseIdentifier: cellId)
+        
+        setupMenuBar()
+        setupNavBarButton()
+    }
     
     func fetchVideo() {
         let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")
@@ -27,7 +55,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 for dictionary in json as! [[String: AnyObject]] {
                     let video = Video()
                     video.title = dictionary["title"] as? String
-                    video.thumbnailImageName = dictionary["thumbnail"] as? String
+                    video.thumbnailImageName = dictionary["thumbnail_image_name"] as? String
                     video.numberOfViews = dictionary["number_of_views"] as? NSNumber
                     
                     let channelDictionary = dictionary["channel"] as! [String: AnyObject]
@@ -49,40 +77,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }.resume()
     }
     
-    lazy var settingsLauncher: SettingsLauncher = {
-        let launcher = SettingsLauncher()
-        launcher.homeController = self
-        return launcher
-    }()
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fetchVideo()
-        
-        
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
-        
-        self.navigationController?.navigationBar.layer.masksToBounds = false
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.lightGray.cgColor
-        self.navigationController?.navigationBar.layer.shadowOpacity = 10
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 5.0)
-        self.navigationController?.navigationBar.layer.shadowRadius = 10
-        
-        titleLabel.text = "  YouTube"
-        titleLabel.textColor = .black
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
-        navigationItem.titleView = titleLabel
-        
-        // Do any additional setup after loading the view, typically from a nib.
-        collectionView.backgroundColor = .white
-        collectionView.register(VideoCell.self, forCellWithReuseIdentifier: cellId)
-        
-        setupMenuBar()
-        setupNavBarButton()
-        
-    }
-    
     func showControllerForSetting(setting: Setting) {
         let settingsController = UIViewController()
         settingsController.view.backgroundColor = .white
@@ -98,36 +92,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         searchButton.tintColor = .gray
         moreButton.tintColor = .gray
-
+        
         navigationItem.rightBarButtonItems = [moreButton, searchButton]
-    }
-    
-    
-    @objc func handleMore() {
-        settingsLauncher.showSettings()
-    }
-    
-    @objc func handleSearch() {
-        print("searchButton")
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! VideoCell
-        cell.video = videos?[indexPath.item]
-        return cell
-    }
-    
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 250)
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return videos?.count ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
     }
     
     let setupItemForMenuBar: MenuBar = {
@@ -136,26 +102,40 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }()
     
     func setupMenuBar() {
-        
         let line = UIView()
         line.backgroundColor = .gray
         view.addSubview(line)
         view.addConstraintsWithForMat(format: "H:|[v0]|", views: line)
-    
+        
         let bottomView = UIView()
         bottomView.backgroundColor = .white
         view.addSubview(bottomView)
+        view.addSubview(setupItemForMenuBar)
         
         view.addConstraintsWithForMat(format: "H:|[v0]|", views: bottomView)
-       
-        
-      
-        view.addSubview(setupItemForMenuBar)
         view.addConstraintsWithForMat(format: "H:|[v0]|", views: setupItemForMenuBar)
         view.addConstraintsWithForMat(format: "V:[v0(1)]-0-[v1(50)]-0-[v2(35)]", views:
             line, setupItemForMenuBar, bottomView)
         
         bottomView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! VideoCell
+        cell.video = videos?[indexPath.item]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 250)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return videos?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
     }
 }
 

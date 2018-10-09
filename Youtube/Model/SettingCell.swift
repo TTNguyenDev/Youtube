@@ -1,23 +1,6 @@
 import UIKit
 
 class SettingCell: UICollectionViewCell {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override var isHighlighted: Bool {
-        didSet {
-            iconImage.tintColor = isHighlighted ? .red : .darkGray
-            nameLabel.textColor = isHighlighted ? .red : .black
-        }
-    }
-    
     var setting: Setting? {
         didSet {
             nameLabel.text = setting?.name.rawValue
@@ -51,6 +34,22 @@ class SettingCell: UICollectionViewCell {
         return line
     }()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            iconImage.tintColor = isHighlighted ? .red : .darkGray
+            nameLabel.textColor = isHighlighted ? .red : .black
+        }
+    }
+    
     func setupView() {
         addSubview(nameLabel)
         addSubview(iconImage)
@@ -61,5 +60,4 @@ class SettingCell: UICollectionViewCell {
         
         addConstraint(NSLayoutConstraint(item: iconImage, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
     }
-    
 }

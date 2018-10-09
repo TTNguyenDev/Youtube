@@ -1,15 +1,6 @@
-//
-//  MenuCell.swift
-//  Youtube
-//
-//  Created by TT Nguyen on 10/3/18.
-//  Copyright © 2018 TT Nguyen. All rights reserved.
-//
-
 import UIKit
 
 class MenuCell: UICollectionViewCell {
-    
     let imageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "home")?.withRenderingMode(.alwaysTemplate)
@@ -17,15 +8,15 @@ class MenuCell: UICollectionViewCell {
         return image
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupCell()
-    }
-    
     override var isSelected: Bool {
         didSet {
             imageView.tintColor = isSelected ? UIColor.red : UIColor.gray
         }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupCell()
     }
     
     required init?(coder aDecoder: NSCoder) {
