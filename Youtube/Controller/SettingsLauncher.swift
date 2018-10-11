@@ -1,24 +1,5 @@
 import UIKit
 
-enum SettingName: String {
-    case Settings = "Settings"
-    case TermPrivacy = "Terms & Privacy Policy"
-    case SendFeedback = "Send Feedback"
-    case Help = "Help"
-    case SwitchAccount = "Switch Account"
-    case Cancel = "Cancel & Dismiss"
-}
-
-class Setting: NSObject {
-    let name: SettingName
-    let image: String
-    
-    init(name: SettingName, imageName: String) {
-        self.name = name
-        self.image = imageName
-    }
-}
-
 class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     let cellId = "cellId"
     let blackView = UIView()

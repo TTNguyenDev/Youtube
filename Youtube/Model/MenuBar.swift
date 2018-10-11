@@ -4,6 +4,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     let cellId = "cellId"
     let imageNames = ["home", "trending", "subscriptions", "account"]
     var horizontalBarLeftConstraint: NSLayoutConstraint?
+    var homeController: HomeController?
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -23,18 +24,16 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         horizontalBarLeftConstraint = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
         horizontalBarLeftConstraint?.isActive = true
         
-        horizontalBarView.bottomAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        horizontalBarView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
         horizontalBarView.heightAnchor.constraint(equalToConstant: 4).isActive = true
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellId)
         addSubview(collectionView)
-       
-        
+    
         addConstraintsWithForMat(format: "H:|[v0]|", views: collectionView)
         addConstraintsWithForMat(format: "V:|[v0]|", views: collectionView)
         
@@ -68,11 +67,6 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let x = CGFloat(indexPath.item) * frame.width / 4
-        horizontalBarLeftConstraint?.constant = x
-        
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
+        homeController?.scrollToMenuIndex(menuIndex: indexPath.item)
     }
 }

@@ -1,6 +1,6 @@
 import UIKit
 
-class SettingCell: UICollectionViewCell {
+class SettingCell: BaseCell {
     var setting: Setting? {
         didSet {
             nameLabel.text = setting?.name.rawValue
@@ -34,15 +34,6 @@ class SettingCell: UICollectionViewCell {
         return line
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override var isHighlighted: Bool {
         didSet {
             iconImage.tintColor = isHighlighted ? .red : .darkGray
@@ -50,7 +41,7 @@ class SettingCell: UICollectionViewCell {
         }
     }
     
-    func setupView() {
+    override func setupView() {
         addSubview(nameLabel)
         addSubview(iconImage)
         

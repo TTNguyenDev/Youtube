@@ -8,6 +8,27 @@
 
 import UIKit
 
+enum SettingName: String {
+    case Settings = "Settings"
+    case TermPrivacy = "Terms & Privacy Policy"
+    case SendFeedback = "Send Feedback"
+    case Help = "Help"
+    case SwitchAccount = "Switch Account"
+    case Cancel = "Cancel & Dismiss"
+}
+
+class Setting: NSObject {
+    let name: SettingName
+    let image: String
+    
+    init(name: SettingName, imageName: String) {
+        self.name = name
+        self.image = imageName
+    }
+}
+
+
+
 extension UIView {
     func addConstraintsWithForMat(format: String, views: UIView...) {
         var viewDictionary = [String: UIView]()

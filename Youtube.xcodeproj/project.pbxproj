@@ -18,7 +18,12 @@
 		5EBB4262216447DA00C77248 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBB4261216447DA00C77248 /* MenuCell.swift */; };
 		5EBB42642164493300C77248 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBB42632164493300C77248 /* MenuBar.swift */; };
 		5EE8A4DC2165C413006F7352 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE8A4DB2165C413006F7352 /* SettingCell.swift */; };
+		B53115DA216F34260090584B /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53115D9216F34260090584B /* ApiService.swift */; };
+		B53115DC216F57170090584B /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53115DB216F57170090584B /* BaseCell.swift */; };
+		B53115DE216F57C80090584B /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53115DD216F57C80090584B /* FeedCell.swift */; };
 		B5717383216CA6CB00A2B4B7 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5717382216CA6CB00A2B4B7 /* Video.swift */; };
+		B5F5EDDC216F838F00B6E0FB /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F5EDDB216F838F00B6E0FB /* TrendingCell.swift */; };
+		B5F5EDDE216F83FD00B6E0FB /* SubscriptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F5EDDD216F83FD00B6E0FB /* SubscriptionsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +40,12 @@
 		5EBB4261216447DA00C77248 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		5EBB42632164493300C77248 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		5EE8A4DB2165C413006F7352 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		B53115D9216F34260090584B /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		B53115DB216F57170090584B /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		B53115DD216F57C80090584B /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		B5717382216CA6CB00A2B4B7 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Video.swift; path = Youtube/View/Video.swift; sourceTree = SOURCE_ROOT; };
+		B5F5EDDB216F838F00B6E0FB /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
+		B5F5EDDD216F83FD00B6E0FB /* SubscriptionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,14 +78,15 @@
 		5EBB424821636B8A00C77248 /* Youtube */ = {
 			isa = PBXGroup;
 			children = (
+				B53115D8216F33F20090584B /* ApiService */,
 				5EBB425F2164479800C77248 /* Controller */,
 				5EBB4260216447A600C77248 /* Model */,
 				5EBB42652164493600C77248 /* View */,
-				5EBB424D21636B8A00C77248 /* Main.storyboard */,
+				B5D17472216D819A000EE205 /* Extension */,
 				5EBB424921636B8A00C77248 /* AppDelegate.swift */,
+				5EBB424D21636B8A00C77248 /* Main.storyboard */,
 				5EBB425021636B8B00C77248 /* Assets.xcassets */,
 				5EBB425221636B8B00C77248 /* LaunchScreen.storyboard */,
-				5EBB425D21636D1700C77248 /* Extention.swift */,
 				5EBB425521636B8B00C77248 /* Info.plist */,
 			);
 			path = Youtube;
@@ -94,6 +105,10 @@
 			isa = PBXGroup;
 			children = (
 				5EBB425B21636CB100C77248 /* VideoCell.swift */,
+				B53115DD216F57C80090584B /* FeedCell.swift */,
+				B5F5EDDB216F838F00B6E0FB /* TrendingCell.swift */,
+				B5F5EDDD216F83FD00B6E0FB /* SubscriptionsCell.swift */,
+				B53115DB216F57170090584B /* BaseCell.swift */,
 				5EE8A4DB2165C413006F7352 /* SettingCell.swift */,
 				5EBB42632164493300C77248 /* MenuBar.swift */,
 				5EBB4261216447DA00C77248 /* MenuCell.swift */,
@@ -108,6 +123,22 @@
 			);
 			name = View;
 			path = "New Group";
+			sourceTree = "<group>";
+		};
+		B53115D8216F33F20090584B /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				B53115D9216F34260090584B /* ApiService.swift */,
+			);
+			path = ApiService;
+			sourceTree = "<group>";
+		};
+		B5D17472216D819A000EE205 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5EBB425D21636D1700C77248 /* Extention.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,10 +216,15 @@
 				5EBB4262216447DA00C77248 /* MenuCell.swift in Sources */,
 				5EBB42642164493300C77248 /* MenuBar.swift in Sources */,
 				5EBB424C21636B8A00C77248 /* HomeController.swift in Sources */,
+				B5F5EDDE216F83FD00B6E0FB /* SubscriptionsCell.swift in Sources */,
 				5E561DD62164E4C1006CBD4F /* SettingsLauncher.swift in Sources */,
+				B53115DE216F57C80090584B /* FeedCell.swift in Sources */,
 				5EBB424A21636B8A00C77248 /* AppDelegate.swift in Sources */,
+				B53115DA216F34260090584B /* ApiService.swift in Sources */,
+				B53115DC216F57170090584B /* BaseCell.swift in Sources */,
 				5EBB425C21636CB100C77248 /* VideoCell.swift in Sources */,
 				5EE8A4DC2165C413006F7352 /* SettingCell.swift in Sources */,
+				B5F5EDDC216F838F00B6E0FB /* TrendingCell.swift in Sources */,
 				B5717383216CA6CB00A2B4B7 /* Video.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,6 +372,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H4NA3RYS6C;
 				INFOPLIST_FILE = Youtube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -353,6 +390,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H4NA3RYS6C;
 				INFOPLIST_FILE = Youtube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
