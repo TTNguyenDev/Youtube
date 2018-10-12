@@ -1,17 +1,7 @@
-//
-//  ApiService.swift
-//  Youtube
-//
-//  Created by TT Nguyen on 10/11/18.
-//  Copyright © 2018 TT Nguyen. All rights reserved.
-//
-
 import UIKit
 
 class ApiService: NSObject {
-    
     static let sharedInstance = ApiService()
-    
     let baseUrl = "https://s3-us-west-2.amazonaws.com/youtubeassets"
     
     func fetchVideosForFeedCell(completion: @escaping ([Video]) -> ()) {
