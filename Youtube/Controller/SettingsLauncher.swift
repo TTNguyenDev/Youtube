@@ -5,6 +5,7 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     let blackView = UIView()
     var homeController: HomeController?
     
+    
     let settings:  [Setting] = {
         return [Setting(name: .Settings, imageName: "settings"), Setting(name: .TermPrivacy, imageName: "privacy"), Setting(name: .SendFeedback, imageName: "feedback"),
                 Setting(name: .Help, imageName: "help"),

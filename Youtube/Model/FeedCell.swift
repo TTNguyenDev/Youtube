@@ -8,6 +8,8 @@
 
 import UIKit
 
+var copyOfIndexPath = 0
+
 class FeedCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     let cellId = "cellId"
     var videos: [Video]?
@@ -41,6 +43,7 @@ class FeedCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! VideoCell
         cell.video = videos?[indexPath.item]
+        copyOfIndexPath = indexPath.item
         return cell
     }
     
@@ -59,6 +62,7 @@ class FeedCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let videoPlayer = VideoPlayer()
-        videoPlayer.showVideoPlayer()
+        videoPlayer.showSettings()
+        copyOfIndexPath = indexPath.row
     }
 }
